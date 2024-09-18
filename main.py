@@ -58,7 +58,7 @@ def db_health_check():
 @app.post("/v1/user")
 async def create_user(user: pydantic_validators.CreateUserPayload):
     try:
-        # Hash the password
+        # Hashing the password
         hashed_password = pwd_context.hash(user.password)
         user.password = hashed_password
         result = user_handler.create_user(user.dict(), engine)

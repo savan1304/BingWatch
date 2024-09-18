@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, select, ForeignKey, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String
-from passlib.context import CryptContext  # Import CryptContext
+from passlib.context import CryptContext
 from db_module.user_handler import create_user
 import requests
 from audio_recorder_streamlit import audio_recorder
@@ -30,7 +30,6 @@ class Like(Base):
     content_id = Column(String)
     content_type= Column(String)
 
-# Database connection
 DATABASE_URL = "postgresql://airflow:airflow@postgres/airflow"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -144,7 +143,6 @@ def show_main_page():
         content_type = st.radio("", ["movie", "tv_show"], index=0, on_change=clear_input)
 
 # Allowing user to enter a comma-separated list of IDs
-
     if 'transcript_query' not in st.session_state:
         st.session_state.transcript_query = ''
     input1, input2 = st.columns([0.8, 0.2])
@@ -347,7 +345,6 @@ def main():
             "Main Page": show_main_page,
             "Search Page": show_search_page,
             "History Page": show_history_page
-            # Add more pages as needed
         }
         st.sidebar.title("Navigation")
         page = st.sidebar.radio("", list(pages.keys()))
